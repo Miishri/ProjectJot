@@ -1,7 +1,7 @@
 package org.personal.projectjot.bootstrap;
 
 
-import org.personal.projectjot.entities.JotRole;
+import org.personal.projectjot.entities.user.JotRole;
 import org.personal.projectjot.repository.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -23,9 +23,11 @@ public class Bootstrapper implements CommandLineRunner {
     }
 
     private void bootstrapRoles() {
+
         JotRole userRole = JotRole.builder()
                 .roleName("USER")
                 .build();
+
         JotRole adminRole = JotRole.builder()
                 .roleName("ADMIN")
                 .build();

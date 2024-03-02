@@ -1,6 +1,6 @@
 package org.personal.projectjot.repository;
 
-import org.personal.projectjot.entities.JotUser;
+import org.personal.projectjot.entities.user.JotUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

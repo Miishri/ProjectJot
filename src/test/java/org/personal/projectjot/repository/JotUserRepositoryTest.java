@@ -3,8 +3,8 @@ package org.personal.projectjot.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.personal.projectjot.entities.JotUser;
-import org.personal.projectjot.entities.JotRole;
+import org.personal.projectjot.entities.user.JotUser;
+import org.personal.projectjot.entities.user.JotRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;

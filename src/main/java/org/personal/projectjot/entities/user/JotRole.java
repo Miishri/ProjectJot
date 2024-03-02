@@ -1,4 +1,4 @@
-package org.personal.projectjot.entities;
+package org.personal.projectjot.entities.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
