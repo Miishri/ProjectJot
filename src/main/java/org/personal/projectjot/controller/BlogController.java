@@ -13,12 +13,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BlogController {
     public static final String BLOG_PATH = "/project-jot/blog";
-    public static final String BLOG_PATH_ID = BLOG_PATH + "/{id}";
-
     private final BlogService blogService;
 
     @GetMapping(BLOG_PATH)
-    public ResponseEntity<Blog> getBlogByTitle(@RequestParam String blogTitle) {
+    public ResponseEntity<Blog> findBlogByTitle(@RequestParam String blogTitle) {
 
         return new ResponseEntity<>(
                 blogService.getBlogByTitle(blogTitle),
@@ -26,8 +24,8 @@ public class BlogController {
         );
     }
 
-    @GetMapping(BLOG_PATH_ID)
-    public ResponseEntity<Blog> getBlogById(@PathVariable Long id) {
+    @GetMapping(BLOG_PATH + "/{id}")
+    public ResponseEntity<Blog> findBlogById(@PathVariable Long id) {
 
         return new ResponseEntity<>(
                 blogService.getBlogById(id),
@@ -35,8 +33,8 @@ public class BlogController {
         );
     }
 
-    @GetMapping(BLOG_PATH)
-    public ResponseEntity<List<Blog>> getBlogs() {
+    @GetMapping(BLOG_PATH  + "s")
+    public ResponseEntity<List<Blog>> findAllBlogs() {
 
         return new ResponseEntity<>(
                 blogService.getBlogs(),
@@ -45,7 +43,7 @@ public class BlogController {
     }
 
     @PostMapping(BLOG_PATH + "/new")
-    public ResponseEntity<Blog> createBlog(@RequestBody Blog blog) {
+    public ResponseEntity<Blog> createNewBlog(@RequestBody Blog blog) {
 
         return new ResponseEntity<>(
                 blogService.createBlog(blog),
@@ -53,7 +51,7 @@ public class BlogController {
         );
     }
 
-    @PostMapping(BLOG_PATH_ID)
+    @PostMapping(BLOG_PATH + "/update/{id}")
     public ResponseEntity<Blog> updateBlogById(@PathVariable Long id, @RequestBody Blog blog) {
 
         return new ResponseEntity<>(
@@ -62,7 +60,7 @@ public class BlogController {
         );
     }
 
-    @DeleteMapping(BLOG_PATH_ID)
+    @DeleteMapping(BLOG_PATH + "/delete/{id}")
     public ResponseEntity<Void> deleteBlogById(@PathVariable Long id) {
 
         if (blogService.deleteBlog(id)) {

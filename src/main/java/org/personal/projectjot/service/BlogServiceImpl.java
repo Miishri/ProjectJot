@@ -33,6 +33,11 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog createBlog(Blog blog) {
+
+        if (blogRepository.findByTitle(blog.getTitle()).isPresent()) {
+            throw new BlogNotFoundException("Project already exists with this name");
+        }
+
         return blogRepository.save(blog);
     }
 
