@@ -2,9 +2,6 @@ package org.personal.projectjot.entities;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,23 +24,9 @@ public class Blog {
     @Id
     private Long id;
 
-    @NotBlank(
-            message = "Blog name is required"
-    )
-    @Size(
-            min = 10,
-            max = 150
-    )
     private String title;
-
-    @NotBlank(
-            message = "Blog text is required"
-    )
     private String paragraphs;
-
-    @NotNull
     private String selfReferenceLink;
-    @NotNull
     private String thumbnailLink;
 
     @UpdateTimestamp
