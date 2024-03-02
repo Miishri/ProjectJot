@@ -3,6 +3,8 @@ package org.personal.projectjot.repository;
 import org.personal.projectjot.entities.Blog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BlogRepository extends JpaRepository<Blog, Long> {
+import java.util.Optional;
 
+public interface BlogRepository extends JpaRepository<Blog, Long> {
+    Optional<Blog> findByTitle(String blogTitle);
 }
