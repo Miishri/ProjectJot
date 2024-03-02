@@ -4,7 +4,7 @@ package org.personal.projectjot.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.personal.projectjot.entities.JotUser;
-import org.personal.projectjot.entities.Role;
+import org.personal.projectjot.entities.JotRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
@@ -51,7 +51,7 @@ public class JotUserRepositoryTest {
     }
 
     private void createTempRole() {
-        roleRepository.save(Role.builder().roleName("USER").build());
+        roleRepository.save(JotRole.builder().roleName("USER").build());
     }
 
 }

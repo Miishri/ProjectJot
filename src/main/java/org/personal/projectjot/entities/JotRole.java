@@ -14,7 +14,7 @@ import java.util.Collection;
 @Builder
 @Entity
 @Table
-public class Role {
+public class JotRole {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
