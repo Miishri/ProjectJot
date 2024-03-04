@@ -39,6 +39,8 @@ public class BlogControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    private final String key = "&h3shDjqAo7FyG7BMW@QyUF9F8JyW@QZVQmjLd";
+
     @BeforeEach
     @Transactional
     void setUp() {
@@ -65,7 +67,8 @@ public class BlogControllerTest {
         mockMvc.perform(
                 get(BlogController.BLOG_PATH).param("blogTitle", testTitle)
                         .accept(MediaType.APPLICATION_JSON)
-                ).andExpect(status().isFound())
+                        .header("KEY", key))
+                .andExpect(status().isFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.title", is(testTitle)));
     }
@@ -78,7 +81,7 @@ public class BlogControllerTest {
         mockMvc.perform(
                 get(BlogController.BLOG_PATH + "/{id}", testBlogId)
                         .accept(MediaType.APPLICATION_JSON)
-                )
+                        .header("KEY", key))
                 .andExpect(status().isFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(testBlogId.intValue())));
@@ -89,7 +92,8 @@ public class BlogControllerTest {
 
         mockMvc.perform(
                 get(BlogController.BLOG_PATH + "s")
-                        .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON)
+                        .header("KEY", key))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.size()", is(1)));
@@ -110,7 +114,8 @@ public class BlogControllerTest {
                 post(BlogController.BLOG_PATH + "/new")
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(testBlog))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("KEY", key))
                 .andExpect(status().isCreated());
     }
 
@@ -129,7 +134,8 @@ public class BlogControllerTest {
                 post(BlogController.BLOG_PATH + "/update/{id}", blog.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedBlog))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("KEY", key))
                 .andExpect(status().isOk());
     }
 
@@ -139,7 +145,8 @@ public class BlogControllerTest {
         Blog blog = blogRepository.findAll().get(0);
 
         mockMvc.perform(
-                delete(BlogController.BLOG_PATH + "/delete/{id}", blog.getId()))
+                delete(BlogController.BLOG_PATH + "/delete/{id}", blog.getId())
+                        .header("KEY", key))
                 .andExpect(status().isAccepted());
     }
 }
