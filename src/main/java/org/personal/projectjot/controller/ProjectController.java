@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ProjectController {
-    public static final String PROJECT_PATH = "/project-jot/project";
+    public static final String PROJECT_PATH = "/project";
     private final ProjectService projectService;
 
     @GetMapping(PROJECT_PATH)

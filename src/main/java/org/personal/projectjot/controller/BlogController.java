@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class BlogController {
-    public static final String BLOG_PATH = "/project-jot/blog";
+    public static final String BLOG_PATH = "/blog";
     private final BlogService blogService;
 
     @GetMapping(BLOG_PATH)
