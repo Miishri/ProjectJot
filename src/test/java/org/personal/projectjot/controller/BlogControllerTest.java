@@ -61,7 +61,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    void testFindBlogsByTitle() throws Exception {
+    void testFindBlogByTitle() throws Exception {
         String testTitle = "Understanding Spring in-Depth";
 
         mockMvc.perform(
