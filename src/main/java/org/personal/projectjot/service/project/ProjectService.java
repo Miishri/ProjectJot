@@ -10,6 +10,5 @@ public interface ProjectService {
     List<Project> getProjects();
     Project createProject(Project project);
     Project updateProject(Long id, Project project);
-
     Boolean deleteProject(Long id);
 }

@@ -1,0 +1,8 @@
+version: '1'
+services:
+  myapp:
+    image: personal/projectjot
+    ports:
+      - "7861:7861"
+    environment:
+      JAVA_OPTS: -Dserver.port=7861
