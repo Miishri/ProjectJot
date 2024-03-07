@@ -52,7 +52,7 @@ public class ProjectController {
         );
     }
 
-    @PostMapping(PROJECT_PATH + "/update/{id}")
+    @PutMapping(PROJECT_PATH + "/update/{id}")
     public ResponseEntity<Project> updateProjectById(@PathVariable Long id, @RequestBody Project project) {
 
         return new ResponseEntity<>(
