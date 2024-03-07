@@ -51,7 +51,7 @@ public class BlogController {
         );
     }
 
-    @PostMapping(BLOG_PATH + "/update/{id}")
+    @PutMapping(BLOG_PATH + "/update/{id}")
     public ResponseEntity<Blog> updateBlogById(@PathVariable Long id, @RequestBody Blog blog) {
 
         return new ResponseEntity<>(
