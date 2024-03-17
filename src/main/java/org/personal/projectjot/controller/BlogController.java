@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/blog")
 public class BlogController {
-    public static final String BLOG_PATH = "/blog";
     private final BlogService blogService;
 
-    @GetMapping(BLOG_PATH)
+    @GetMapping
     public ResponseEntity<Blog> findBlogByTitle(@RequestParam String blogTitle) {
 
         return new ResponseEntity<>(
@@ -24,7 +24,7 @@ public class BlogController {
         );
     }
 
-    @GetMapping(BLOG_PATH + "/{id}")
+    @GetMapping( "/{id}")
     public ResponseEntity<Blog> findBlogById(@PathVariable Long id) {
 
         return new ResponseEntity<>(
@@ -33,7 +33,7 @@ public class BlogController {
         );
     }
 
-    @GetMapping(BLOG_PATH  + "s")
+    @GetMapping("/all")
     public ResponseEntity<List<Blog>> findAllBlogs() {
 
         return new ResponseEntity<>(
@@ -42,7 +42,7 @@ public class BlogController {
         );
     }
 
-    @PostMapping(BLOG_PATH + "/new")
+    @PostMapping("/new")
     public ResponseEntity<Blog> createNewBlog(@RequestBody Blog blog) {
 
         return new ResponseEntity<>(
@@ -51,7 +51,7 @@ public class BlogController {
         );
     }
 
-    @PutMapping(BLOG_PATH + "/update/{id}")
+    @PutMapping( "/update/{id}")
     public ResponseEntity<Blog> updateBlogById(@PathVariable Long id, @RequestBody Blog blog) {
 
         return new ResponseEntity<>(
@@ -60,7 +60,7 @@ public class BlogController {
         );
     }
 
-    @DeleteMapping(BLOG_PATH + "/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteBlogById(@PathVariable Long id) {
 
         if (blogService.deleteBlog(id)) {

@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("project")
 public class ProjectController {
-    public static final String PROJECT_PATH = "/project";
     private final ProjectService projectService;
 
-    @GetMapping(PROJECT_PATH)
+    @GetMapping
     public ResponseEntity<Project> findProjectByTitle(@RequestParam String projectTitle) {
 
         return new ResponseEntity<>(
@@ -25,7 +25,7 @@ public class ProjectController {
         );
     }
 
-    @GetMapping(PROJECT_PATH + "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Project> findProjectById(@PathVariable Long id) {
 
         return new ResponseEntity<>(
@@ -34,7 +34,7 @@ public class ProjectController {
         );
     }
 
-    @GetMapping(PROJECT_PATH + "s")
+    @GetMapping( "/all")
     public ResponseEntity<List<Project>> findAllProjects() {
 
         return new ResponseEntity<>(
@@ -43,7 +43,7 @@ public class ProjectController {
         );
     }
 
-    @PostMapping(PROJECT_PATH + "/new")
+    @PostMapping("/new")
     public ResponseEntity<Project> createNewProject(@RequestBody Project project) {
 
         return new ResponseEntity<>(
@@ -52,24 +52,19 @@ public class ProjectController {
         );
     }
 
-    @PutMapping(PROJECT_PATH + "/update/{id}")
+    @PutMapping( "/update/{id}")
     public ResponseEntity<Project> updateProjectById(@PathVariable Long id, @RequestBody Project project) {
 
-        return new ResponseEntity<>(
-                projectService.updateProject(id, project),
-                HttpStatus.OK
-        );
+        return ResponseEntity.ok(projectService.updateProject(id, project));
     }
 
-    @DeleteMapping(PROJECT_PATH + "/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProjectById(@PathVariable Long id) {
 
         if (projectService.deleteProject(id)) {
-            return new ResponseEntity<>(
-                    HttpStatus.ACCEPTED
-            );
+            return ResponseEntity.noContent().build();
         }
 
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.notFound().build();
     }
 }

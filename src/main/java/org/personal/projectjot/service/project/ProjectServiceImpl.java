@@ -6,6 +6,8 @@ import org.personal.projectjot.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -41,7 +43,9 @@ public class ProjectServiceImpl implements ProjectService {
             throw new ProjectNotFoundException("Project already exists with this name");
         }
 
-        return projectRepository.save(project);
+        Project savedProject = projectRepository.save(project);
+        savedProject.setSelfReferenceLink("");
+        return savedProject;
     }
 
     @Override
@@ -50,10 +54,17 @@ public class ProjectServiceImpl implements ProjectService {
         Project updatedProjects = projectRepository.findById(id)
                 .orElseThrow(ProjectNotFoundException::new);
 
-        updatedProjects.setTitle(project.getTitle());
-        updatedProjects.setDescription(project.getDescription());
-        updatedProjects.setThumbnailLink(project.getThumbnailLink());
-        updatedProjects.setSelfReferenceLink(project.getSelfReferenceLink());
+        AtomicReference<Optional<Project>> foundProject = new AtomicReference<>(projectRepository.findById(id));
+
+        foundProject.get().ifPresentOrElse(
+                projectToBeUpdated -> {
+                    projectToBeUpdated.setTitle(project.getTitle());
+                    projectToBeUpdated.setDescription(project.getDescription());
+                    projectToBeUpdated.setThumbnailLink(project.getThumbnailLink());
+                    projectToBeUpdated.setSelfReferenceLink(project.getSelfReferenceLink());
+                },
+                ProjectNotFoundException::new
+        );
 
         return projectRepository.save(updatedProjects);
     }
